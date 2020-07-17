@@ -33,7 +33,9 @@
     ]
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^6.0.3",
     "exports-loader": "^1.1.0",
-    "imports-loader": "^1.1.0"
+    "imports-loader": "^1.1.0",
+    "react-app-rewired": "^2.1.6"
   }
 }
