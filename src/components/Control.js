@@ -7,7 +7,7 @@ class Control extends React.Component {
   render() {
 
     return (
-      console.log("works")
+      console.log("it works")
     )
   }
 }
