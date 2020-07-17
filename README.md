@@ -5,71 +5,59 @@ initialized July 17th, 2020, by Ethan Alexander Firpo
 
 Simulant is an application that simulates ant behavior using JavaScript.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Capstone Proposal
 
-## Available Scripts
+#### Name of Student:
 
-In the project directory, you can run:
+Ethan Firpo
 
-### `npm start`
+#### Name of Project:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Simulant -- but ant is in italics like it's the internet in 2002.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+#### Project's Purpose or Goal: (What will it do for users?)
 
-### `npm test`
+Provide education for a beginner/intermediate level science audience on ants through real-time and interactive simulation of ant colony behavior and data.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### List the absolute minimum features the project requires to meet this purpose or goal:
 
-### `npm run build`
+Provide basic factual information on simplest ant behavior(foraging).
+Provide static simulation of simplest ant behavior.
+Allow a user to start/stop the simulation.
+What tools, frameworks, libraries, APIs, modules and/or other resources (whatever is specific to your track, and your language) will you use to create this MVP? List them all here. Be specific.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React (likely React Native and/or ReactDND)
+- CreateJS/EaselJS
+- Redux
+- Node.js
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### If you finish developing the minimum viable product (MVP) with time to spare, what will you work on next? Describe these features here: Be specific.
 
-### `npm run eject`
+- Simulate in-nest colony behavior, reproduction, life cycles, labor roles.
+- Allow users to place food, water, otherwise interact with the ants, control speed at which simulation runs.
+- Allow users to store their own "ant farms" and come back to their colony.
+- Allow users to track individual ants' life cycles and behaviors.
+- Simulate other arthropod/animal behaviors -- bees foraging/colony activity, spider-web construction, and fish-school behavior come to mind as things I would like to build some day.  
+- Maybe game-ify the whole thing and add point systems, predators, rival ant colonies, randomize start conditions and make it all dynamic with RNG.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### What additional tools, frameworks, libraries, APIs, or other resources will these additional features require?
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+I'll need a database for user information, but unknown whether I'll be using Firestore, or MongoDB. I'll have to see as we begin using Firestore.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Is there anything else you'd like your instructor to know?
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+This has been edited since the original proposal to reflect choices of development tools. CreateJS/EaselJS has replaced the Unity Engine as my choice to render the simulation, notably.
 
-## Learn More
+## Setup
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. If you do not have Node installed on your machine, please go to https://www.learnhowtoprogram.com/intermediate-javascript/getting-started-with-javascript/installing-node-js and follow the instructions for your operating system.
+2. Clone or download this repository from https://github.com/efirpo/simulant
+3. In your terminal, navigate to the root directory of the project and run `npm install`
+4. Run `npm start` once that completes.
+5. Navigate to `localhost:3000` in your web browser.
+6. Enjoy the simple animation.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Legal
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+MIT License (c) 2020 Ethan Alexander Firpo.
