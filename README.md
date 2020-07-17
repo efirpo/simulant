@@ -1,3 +1,10 @@
+__SIMULANT__
+initialized July 17th, 2020, by Ethan Alexander Firpo
+
+## Description
+
+Simulant is an application that simulates ant behavior using JavaScript.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
