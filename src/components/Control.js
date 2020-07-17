@@ -7,12 +7,7 @@ class Control extends React.Component {
   constructor() {
     super();
   }
-  handleTick(event) {
-    this.stage.circle.x += 3
-    if (this.stage.circle.x > this.stage.canvas.width) {
-      this.stage.circle.x = 0
-    }
-  }
+
 
   componentDidMount() {
 
@@ -23,8 +18,15 @@ class Control extends React.Component {
     circle.x = 100;
     circle.y = 100;
     this.stage.addChild(circle);
+    const handleTick = (event) => {
+      circle.x += 3
+      if (circle.x > this.stage.canvas.width) {
+        circle.x = 0
+      }
+      this.stage.update();
+    }
     createjs.Ticker.setFPS(30)
-    createjs.Ticker.addEventListener("tick", this.handleTick)
+    createjs.Ticker.addEventListener("tick", handleTick)
 
     this.stage.update()
   }
