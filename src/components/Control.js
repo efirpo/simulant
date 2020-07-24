@@ -48,6 +48,9 @@ class Control extends React.Component {
   }
   componentWillMount() {
     this.createGrid()
+    for (let i = 0; i <= this.maxAnts; i++) {
+      this.spawnAnt()
+    }
     // console.log(this.coordArr)
   }
   spawnAnt = () => {
@@ -73,20 +76,31 @@ class Control extends React.Component {
 
     var canvas = ReactDOM.findDOMNode(this.refs.canvas);
     this.stage = new createjs.Stage(canvas);
-    let ticks;
+    let ticks = this.coordArr
     const handleTick = (event) => {
       ticks = createjs.Ticker.getTicks()
-
-      if (ticks % 5 == 0) {
-        let newAnt = this.spawnAnt()
-        let antDot = new createjs.Shape();
-        antDot.graphics.beginFill("Black").drawCircle(0, 0, 2)
-        antDot.x = newAnt[0]
-        antDot.y = newAnt[1]
-        this.stage.addChild(antDot)
-      } else if (ticks == 5000) {
-        console.table(this.coordArr)
+      for (let x = 0; x <= this.gridSize; x++) {
+        for (let y = 0; y <= this.gridSize; y++) {
+          if (this.coordArr[x][y].hasAnt()) {
+            let antDot = new createjs.Shape();
+            antDot.graphics.beginFill("Black").drawCircle(0, 0, 2)
+            antDot.x = x
+            antDot.y = y
+          }
+        }
       }
+      // if (ticks % 5 == 0) {
+      //   if (this.antsOut < this.maxAnts) {
+      //     let newAnt = this.spawnAnt()
+      //     let antDot = new createjs.Shape();
+      //     antDot.graphics.beginFill("Black").drawCircle(0, 0, 2)
+      //     antDot.x = newAnt[0]
+      //     antDot.y = newAnt[1]
+      //     this.stage.addChild(antDot)
+      //   } else if (ticks == 5000) {
+      //     console.table(this.coordArr)
+      //   }
+      // }
 
       this.stage.update();
     }
