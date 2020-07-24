@@ -10,10 +10,27 @@ class Control extends React.Component {
     super();
   }
 
-
-
   componentDidMount() {
     let coordArr = [];
+    let tempCoords = [];
+    let gridSize = 200;
+    let population = [];
+    let maxAnts = 100;
+
+    const createGrid = () => {
+      for (let x = 0; x < gridSize; x++) {
+        coordArr[x] = [];
+        tempCoords[x] = [];
+        for (let y = 0; y < gridSize; y++) {
+          coordArr[x][y] = new Cell(x, y);
+          tempCoords[x][y] = new Cell(x, y)
+        }
+      }
+    }
+
+    const createRandomNum = (min, max) => {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
     var canvas = ReactDOM.findDOMNode(this.refs.canvas);
     this.stage = new createjs.Stage(canvas);
@@ -36,8 +53,6 @@ class Control extends React.Component {
         circle.x = 0
 
       }
-      coordArr.push([circle.x, circle.y])
-      console.log(coordArr)
 
       if (ticks % 5 == 0) {
         var dot = new createjs.Shape();

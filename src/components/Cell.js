@@ -1,4 +1,4 @@
-export function Cell(x, y) {
+export default function Cell(x, y) {
   this.x = x;
   this.y = y;
   this.ant = null;
