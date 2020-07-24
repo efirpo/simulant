@@ -56,12 +56,13 @@ class Control extends React.Component {
     let newCoords = this.createRandomCoords(x, y);
     var a = newCoords[0];
     var b = newCoords[1];
-    if (!this.coordArr[a][b].hasAnt() && this.antsOut < this.maxAnts) {
-      this.coordArr[a][b].ant = new Ant();
-      this.tempCoords[a][b].ant = this.coordArr[a][b].ant
-      this.antsOut += 1;
-
+    if (!this.coordArr[1][1].hasAnt() && this.antsOut < this.maxAnts) {
+      // this.coordArr[12][15].ant = new Ant();
+      // this.tempCoords[12][15].ant = this.coordArr[a][b].ant
+      // this.antsOut += 1;
+      console.log(this.coordArr[1][1])
     }
+    return [a, b]
   }
 
   componentDidMount() {
@@ -88,18 +89,14 @@ class Control extends React.Component {
       ticks = createjs.Ticker.getTicks()
 
       if (ticks % 5 == 0) {
-        this.spawnAnt()
+        let newAnt = this.spawnAnt()
+        let antDot = new createjs.Shape();
+        antDot.graphics.beginFill("Black").drawCircle(0, 0, 2)
+        antDot.x = newAnt[0]
+        antDot.y = newAnt[1]
+        this.stage.addChild(antDot)
       }
 
-      for (let i = 0; i <= this.gridSize; i++) {
-        for (let j = 0; j <= this.gridSize; j++) {
-          if (this.coordArr[i][j].hasAnt()) {
-            let antDot = new createjs.Shape();
-            antDot.graphics.beginFill("Black").drawCircle(0, 0, 1)
-            this.stage.addChild(antDot)
-          }
-        }
-      }
       this.stage.update();
     }
     // const handleCircleClick = () => {
