@@ -4,7 +4,7 @@ export default function Cell(x, y) {
   this.ant = null;
   this.food = 0;
   this.signal = 0;
-  this.has_ant = function () {
+  this.hasAnt = function () {
     return this.ant ? true : false;
   };
 }
