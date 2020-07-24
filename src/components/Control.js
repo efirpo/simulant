@@ -26,14 +26,14 @@ class Control extends React.Component {
     }
   }
   createRandomNum = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(Math.random() * 200);
   }
   createRandomCoords = (x, y) => {
     let a = this.createRandomNum(x + 1, x + 100);
     let b = this.createRandomNum(y + 1, y + 100);
     let z = this.createBound(a);
     let q = this.createBound(b);
-    return [a, b]
+    return [z, q]
   }
   createBound = (i) => {
     let bound = i;
@@ -66,6 +66,7 @@ class Control extends React.Component {
 
   componentDidMount() {
     console.table(this.coordArr)
+    console.log(this.createRandomCoords())
 
 
 
@@ -90,15 +91,15 @@ class Control extends React.Component {
         this.spawnAnt()
       }
 
-      // for (let i = 0; i <= this.gridSize; i++) {
-      //   for (let j = 0; j <= this.gridSize; j++) {
-      //     if (this.coordArr[i][j].hasAnt()) {
-      //       let antDot = new createjs.Shape();
-      //       antDot.graphics.beginFill("Black").drawCircle(0, 0, 1)
-      //       this.stage.addChild(antDot)
-      //     }
-      //   }
-      // }
+      for (let i = 0; i <= this.gridSize; i++) {
+        for (let j = 0; j <= this.gridSize; j++) {
+          if (this.coordArr[i][j].hasAnt()) {
+            let antDot = new createjs.Shape();
+            antDot.graphics.beginFill("Black").drawCircle(0, 0, 1)
+            this.stage.addChild(antDot)
+          }
+        }
+      }
       this.stage.update();
     }
     // const handleCircleClick = () => {
