@@ -1,6 +1,8 @@
 import * as createjs from 'createjs-easeljs';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Ant from './Ant';
+import Cell from './Cell';
 
 
 class Control extends React.Component {
@@ -9,7 +11,9 @@ class Control extends React.Component {
   }
 
 
+
   componentDidMount() {
+    let coordArr = [];
 
     var canvas = ReactDOM.findDOMNode(this.refs.canvas);
     this.stage = new createjs.Stage(canvas);
@@ -32,7 +36,8 @@ class Control extends React.Component {
         circle.x = 0
 
       }
-
+      coordArr.push([circle.x, circle.y])
+      console.log(coordArr)
 
       if (ticks % 5 == 0) {
         var dot = new createjs.Shape();
@@ -40,6 +45,8 @@ class Control extends React.Component {
         dot.x = circle.x
         dot.y = circle.y
         this.stage.addChild(dot)
+        coordArr.push([circle.x, circle.y])
+        console.log(coordArr)
       }
       this.stage.update();
     }

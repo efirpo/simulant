@@ -1,6 +1,5 @@
-import React from 'react';
-import * as createjs from 'createjs-easeljs';
-
 export function Ant() {
-
+  this.carryingFood = false;
+  this.lastPheremone = 0;
+  this.orientation = Math.random() * 90;
 }
