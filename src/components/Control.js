@@ -8,29 +8,38 @@ import Cell from './Cell';
 class Control extends React.Component {
   constructor() {
     super();
+    this.coordArr = [];
+    this.tempCoords = [];
+    this.gridSize = 200;
+    this.population = [];
+    this.maxAnts = 100;
   }
 
-  componentDidMount() {
-    let coordArr = [];
-    let tempCoords = [];
-    let gridSize = 200;
-    let population = [];
-    let maxAnts = 100;
-
-    const createGrid = () => {
-      for (let x = 0; x < gridSize; x++) {
-        coordArr[x] = [];
-        tempCoords[x] = [];
-        for (let y = 0; y < gridSize; y++) {
-          coordArr[x][y] = new Cell(x, y);
-          tempCoords[x][y] = new Cell(x, y)
-        }
+  createGrid = () => {
+    for (let x = 0; x < this.gridSize; x++) {
+      this.coordArr[x] = [];
+      this.tempCoords[x] = [];
+      for (let y = 0; y < this.gridSize; y++) {
+        this.coordArr[x][y] = new Cell(x, y);
+        this.tempCoords[x][y] = new Cell(x, y)
       }
     }
+  }
+  createRandomNum = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  componentWillMount() {
+    this.createGrid()
+    console.log(this.coordArr)
+  }
 
-    const createRandomNum = (min, max) => {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+
+  componentDidMount() {
+
+
+
+
+
 
     var canvas = ReactDOM.findDOMNode(this.refs.canvas);
     this.stage = new createjs.Stage(canvas);
@@ -60,8 +69,6 @@ class Control extends React.Component {
         dot.x = circle.x
         dot.y = circle.y
         this.stage.addChild(dot)
-        coordArr.push([circle.x, circle.y])
-        console.log(coordArr)
       }
       this.stage.update();
     }
