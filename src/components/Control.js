@@ -56,11 +56,11 @@ class Control extends React.Component {
     let newCoords = this.createRandomCoords(x, y);
     var a = newCoords[0];
     var b = newCoords[1];
-    if (!this.coordArr[1][1].hasAnt() && this.antsOut < this.maxAnts) {
-      // this.coordArr[12][15].ant = new Ant();
-      // this.tempCoords[12][15].ant = this.coordArr[a][b].ant
-      // this.antsOut += 1;
-      console.log(this.coordArr[1][1])
+    if (!this.coordArr[a][b].hasAnt() && this.antsOut < this.maxAnts) {
+      this.coordArr[a][b].ant = new Ant();
+      this.tempCoords[a][b].ant = this.coordArr[a][b].ant
+      this.antsOut += 1;
+      console.log(this.coordArr[a][b].ant)
     }
     return [a, b]
   }
@@ -73,17 +73,6 @@ class Control extends React.Component {
 
     var canvas = ReactDOM.findDOMNode(this.refs.canvas);
     this.stage = new createjs.Stage(canvas);
-
-    // var circle = new createjs.Shape();
-    // circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 10);
-    // circle.x = 100;
-    // circle.y = 100;
-    // this.stage.addChild(circle);
-    // var square = new createjs.Shape();
-    // square.graphics.beginFill("red").drawRect(5, 5, 5, 5)
-    // square.x = 50;
-    // square.y = 20;
-    // this.stage.addChild(square);
     let ticks;
     const handleTick = (event) => {
       ticks = createjs.Ticker.getTicks()
@@ -95,6 +84,8 @@ class Control extends React.Component {
         antDot.x = newAnt[0]
         antDot.y = newAnt[1]
         this.stage.addChild(antDot)
+      } else if (ticks == 5000) {
+        console.table(this.coordArr)
       }
 
       this.stage.update();
@@ -113,7 +104,7 @@ class Control extends React.Component {
   render() {
 
     return (
-      <canvas ref="canvas" width="200" height="200"></canvas>
+      <canvas ref="canvas" width="400" height="400"></canvas>
     )
   }
 }
