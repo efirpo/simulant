@@ -69,26 +69,28 @@ class Control extends React.Component {
   }
 
   componentDidMount() {
-    console.table(this.coordArr)
-    console.log(this.createRandomCoords())
 
 
-
-    var canvas = ReactDOM.findDOMNode(this.refs.canvas);
+    let canvas = ReactDOM.findDOMNode(this.refs.canvas);
     this.stage = new createjs.Stage(canvas);
-    let ticks = this.coordArr
+    let ticks;
     const handleTick = (event) => {
+      const makeAnt = (x, y) => {
+        let antDot = new createjs.Shape()
+        antDot.graphics.beginFill("Black").drawCircle(0, 0, 2)
+        antDot.x = x
+        antDot.y = y
+        this.stage.addChild(antDot)
+        this.stage.update()
+        console.log("MAKE ANT")
+      }
       ticks = createjs.Ticker.getTicks()
       for (let x = 0; x <= this.gridSize; x++) {
         for (let y = 0; y <= this.gridSize; y++) {
-          if (this.coordArr[x][y].hasAnt()) {
-            let antDot = new createjs.Shape();
-            antDot.graphics.beginFill("Black").drawCircle(0, 0, 2)
-            antDot.x = x
-            antDot.y = y
-          }
+          return console.log(this.coordArr[x][y].hasAnt())
         }
       }
+
       // if (ticks % 5 == 0) {
       //   if (this.antsOut < this.maxAnts) {
       //     let newAnt = this.spawnAnt()
