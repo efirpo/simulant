@@ -19,7 +19,7 @@ export const createGrid = () => {
 }
 
 export const createRandomNum = (min, max) => {
-  return Math.floor(Math.random() * 200);
+  return Math.floor(Math.random() * (max - min + 1));
 }
 
 export const createRandomCoords = (x, y) => {
@@ -51,7 +51,8 @@ export const spawnAnt = () => {
     coordArr[a][b].ant = new Ant();
     tempCoords[a][b].ant = coordArr[a][b].ant
     antsOut += 1;
-    console.log("ANTS:" + coordArr[a][b].ant)
+    console.log("ANTS:" + a + "," + b)
+    console.table(coordArr[a][b].ant)
   }
   return [a, b]
 }
