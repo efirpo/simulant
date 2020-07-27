@@ -12,13 +12,7 @@ class Control extends React.Component {
 
 
   componentWillMount() {
-    grid.createGrid()
-    for (let i = 0; i <= grid.maxAnts; i++) {
-      grid.spawnAnt()
-    }
-    for (let i = 0; i <= 5; i++) {
-      grid.spawnFood()
-    }
+    grid.createPopulation()
   }
 
   componentDidMount() {
@@ -27,45 +21,25 @@ class Control extends React.Component {
     this.stage = new createjs.Stage(canvas);
     let ticks;
 
-    const colorForCell = (cell) => {
 
-      if (cell.ant) {
-
-        let antDot = new createjs.Shape()
-        antDot.graphics.beginFill("Black").drawCircle(0, 0, 2)
-        antDot.x = cell.x * 2
-        antDot.y = cell.y * 2
-        this.stage.addChild(antDot)
-        console.log("COLOR FOR CELL WENT THROUGH")
-
-      } else if (cell.food > 0) {
-
-        let foodDot = new createjs.Shape()
-        foodDot.graphics.beginFill("Red").drawCircle(0, 0, (cell.food * 5))
-        foodDot.x = cell.x * 2
-        foodDot.y = cell.x * 2
-        this.stage.addChild(foodDot)
-
-      }
-      else {
-        if (cell.signal > 0) {
-          let signalDot = new createjs.Shape()
-          signalDot.graphics.beginFill("Blue").drawCircle(0, 0, 2)
-          signalDot.x = cell.x * 2
-          signalDot.y = cell.y * 2
-          signalDot.alpha = cell.signal > 1 ? 1 : cell.signal
-        }
-      }
-      this.stage.update()
-    }
 
     const handleTick = () => {
       ticks = createjs.Ticker.getTicks()
-      for (let x = 0; x < grid.gridSize; x++) {
-        for (let y = 0; y < grid.gridSize; y++) {
-          colorForCell(grid.coordArr[x][y])
-        }
+      console.table(grid.population)
+      for (let i = 0; i < grid.population.length; i++) {
+        grid.population[i].coords = grid.moveAnt(i)
       }
+      for (let i = 0; i < grid.population.length; i++) {
+        let antDot = new createjs.Shape()
+        antDot.graphics.beginFill("Black").drawCircle(0, 0, 2)
+        console.log(grid.population[i].coords[0])
+        antDot.x = grid.population[i].coords[0]
+        antDot.y = grid.population[i].coords[1]
+        this.stage.addChild(antDot)
+
+      }
+      this.stage.update();
+
 
 
 
@@ -88,7 +62,7 @@ class Control extends React.Component {
     // }
     // circle.on("click", handleCircleClick)
 
-    createjs.Ticker.setFPS(30)
+    createjs.Ticker.setFPS(15)
     createjs.Ticker.addEventListener("tick", handleTick)
 
 
