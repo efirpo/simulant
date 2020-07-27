@@ -87,7 +87,7 @@ class Control extends React.Component {
       ticks = createjs.Ticker.getTicks()
       for (let x = 0; x <= this.gridSize; x++) {
         for (let y = 0; y <= this.gridSize; y++) {
-          return console.log(this.coordArr[x][y].hasAnt())
+          return console.log(this.coordArr[x][y].hasAnt() ? makeAnt(x, y) : null)
         }
       }
 
