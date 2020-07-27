@@ -10,23 +10,25 @@ class Control extends React.Component {
     super(props);
   }
 
+
   componentWillMount() {
     grid.createGrid()
     for (let i = 0; i <= grid.maxAnts; i++) {
       grid.spawnAnt()
     }
-
-    // console.log(this.coordArr)
+    for (let i = 0; i <= 5; i++) {
+      grid.spawnFood()
+    }
   }
 
   componentDidMount() {
-
 
     let canvas = ReactDOM.findDOMNode(this.refs.canvas);
     this.stage = new createjs.Stage(canvas);
     let ticks;
 
-    colorForCell = (cell) => {
+    const colorForCell = (cell) => {
+
       if (cell.ant) {
         return () => {
           let antDot = new createjs.Shape()
@@ -34,16 +36,16 @@ class Control extends React.Component {
           antDot.x = cell.x * 2
           antDot.y = cell.y * 2
           this.stage.addChild(antDot)
-          this.stage.update()
+
         }
       } else if (cell.food > 0) {
         return () => {
           let foodDot = new createjs.Shape()
-          foodDot.graphics.beginFill("Red").drawCircle(0, 0, 5)
+          foodDot.graphics.beginFill("Red").drawCircle(0, 0, (cell.food * 5))
           foodDot.x = cell.x * 2
           foodDot.y = cell.x * 2
           this.stage.addChild(foodDot)
-          this.stage.update()
+
         }
       }
       else {
@@ -54,17 +56,20 @@ class Control extends React.Component {
             signalDot.x = cell.x * 2
             signalDot.y = cell.y * 2
             signalDot.alpha = cell.signal > 1 ? 1 : cell.signal
-            this.stage.update()
+
           }
         }
       }
+      this.stage.update()
     }
 
-
-
-    const handleTick = (event) => {
-
+    const handleTick = () => {
       ticks = createjs.Ticker.getTicks()
+      for (let x = 0; x < grid.gridSize; x++) {
+        for (let y = 0; y < grid.gridSize; y++) {
+          colorForCell(grid.coordArr[x][y])
+        }
+      }
 
 
 

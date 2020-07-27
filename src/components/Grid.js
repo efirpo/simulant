@@ -47,7 +47,7 @@ export const spawnAnt = () => {
   let newCoords = createRandomCoords(x, y);
   var a = newCoords[0];
   var b = newCoords[1];
-  if (coordArr[a][b].hasAnt() == false && antsOut < maxAnts) {
+  if (coordArr[a][b].hasAnt() === false && antsOut < maxAnts) {
     coordArr[a][b].ant = new Ant();
     tempCoords[a][b].ant = coordArr[a][b].ant
     antsOut += 1;
@@ -55,4 +55,14 @@ export const spawnAnt = () => {
     console.table(coordArr[a][b].ant)
   }
   return [a, b]
+}
+
+export const spawnFood = () => {
+  let x = 0;
+  let y = 0;
+  let newCoords = createRandomCoords(x, y);
+  var a = newCoords[0]
+  var b = newCoords[1];
+  coordArr[a][b].food = Math.random() * 1.5
+
 }
