@@ -30,34 +30,30 @@ class Control extends React.Component {
     const colorForCell = (cell) => {
 
       if (cell.ant) {
-        return () => {
-          let antDot = new createjs.Shape()
-          antDot.graphics.beginFill("Black").drawCircle(0, 0, 2)
-          antDot.x = cell.x * 2
-          antDot.y = cell.y * 2
-          this.stage.addChild(antDot)
 
-        }
+        let antDot = new createjs.Shape()
+        antDot.graphics.beginFill("Black").drawCircle(0, 0, 2)
+        antDot.x = cell.x * 2
+        antDot.y = cell.y * 2
+        this.stage.addChild(antDot)
+        console.log("COLOR FOR CELL WENT THROUGH")
+
       } else if (cell.food > 0) {
-        return () => {
-          let foodDot = new createjs.Shape()
-          foodDot.graphics.beginFill("Red").drawCircle(0, 0, (cell.food * 5))
-          foodDot.x = cell.x * 2
-          foodDot.y = cell.x * 2
-          this.stage.addChild(foodDot)
 
-        }
+        let foodDot = new createjs.Shape()
+        foodDot.graphics.beginFill("Red").drawCircle(0, 0, (cell.food * 5))
+        foodDot.x = cell.x * 2
+        foodDot.y = cell.x * 2
+        this.stage.addChild(foodDot)
+
       }
       else {
         if (cell.signal > 0) {
-          return () => {
-            let signalDot = new createjs.Shape()
-            signalDot.graphics.beginFill("Blue").drawCircle(0, 0, 2)
-            signalDot.x = cell.x * 2
-            signalDot.y = cell.y * 2
-            signalDot.alpha = cell.signal > 1 ? 1 : cell.signal
-
-          }
+          let signalDot = new createjs.Shape()
+          signalDot.graphics.beginFill("Blue").drawCircle(0, 0, 2)
+          signalDot.x = cell.x * 2
+          signalDot.y = cell.y * 2
+          signalDot.alpha = cell.signal > 1 ? 1 : cell.signal
         }
       }
       this.stage.update()
