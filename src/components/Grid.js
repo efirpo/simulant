@@ -5,8 +5,8 @@ import Ant from './Ant';
 export let population = [];
 export let coordArr = [];
 export let tempCoords = [];
-export const gridSize = 400;
-export const maxAnts = 100;
+export const gridSize = 300;
+export const maxAnts = 60;
 export let antsOut = 0;
 
 export const createPopulation = () => {
@@ -19,7 +19,7 @@ export const createPopulation = () => {
 
 
 export const moveAnt = (i) => {
-  let changeDirection = Math.ceil(Math.random() * 3)
+  let changeDirection = Math.ceil(Math.random() * 4)
   switch (changeDirection) {
     case 1:
       if (population[i].orientation == 8) {
@@ -29,8 +29,9 @@ export const moveAnt = (i) => {
       }
       break
     case 2:
-      break
     case 3:
+      break
+    case 4:
       if (population[i].orientation == 1) {
         population[i].orientation = 8
       } else {
@@ -42,50 +43,50 @@ export const moveAnt = (i) => {
   switch (population[i].orientation) {
     case 1:
       newCoords = [
-        createBound(population[i].coords[0] + (Math.ceil(Math.random() * 2))),
-        population[i].coords[1]]
+        createBound(population[i].Shape.x += (Math.ceil(Math.random() * 2))),
+        population[i].Shape.y]
       return newCoords
 
     case 2:
       newCoords = [
-        createBound(population[i].coords[0] + 1),
-        createBound(population[i].coords[1] + 1)]
+        createBound(population[i].Shape.x += 1),
+        createBound(population[i].Shape.y += 1)]
       return newCoords
 
     case 3:
       newCoords = [
-        population[i].coords[0],
-        createBound(population[i].coords[1] + (Math.ceil(Math.random() * 2)))]
+        population[i].Shape.x,
+        createBound(population[i].Shape.y += (Math.ceil(Math.random() * 2)))]
       return newCoords
 
     case 4:
       newCoords = [
-        createBound(population[i].coords[0] - 1),
-        createBound(population[i].coords[1] + 1)]
+        createBound(population[i].Shape.x -= 1),
+        createBound(population[i].Shape.y += 1)]
       return newCoords
 
     case 5:
       newCoords = [
-        createBound(population[i].coords[0] - (Math.ceil(Math.random() * 2))),
-        population[i].coords[0]]
+        createBound(population[i].Shape.x -= (Math.ceil(Math.random() * 2))),
+        population[i].Shape.y]
       return newCoords
 
     case 6:
       newCoords = [
-        createBound(population[i].coords[0] - 1),
-        createBound(population[i].coords[1] - 1)]
+        createBound(population[i].Shape.x -= 1),
+        createBound(population[i].Shape.y -= 1)]
       return newCoords
 
     case 7:
       newCoords = [
-        population[i].coords[0],
-        createBound(population[i].coords[1] - (Math.ceil(Math.random() * 2)))]
+        population[i].Shape.x,
+        createBound(population[i].Shape.y -= (Math.ceil(Math.random() * 2)))]
       return newCoords
 
     case 8:
       newCoords = [
-        createBound(population[i].coords[0] + 1),
-        createBound(population[i].coords[1] - 1)]
+        createBound(population[i].Shape.x += 1),
+        createBound(population[i].Shape.y -= 1)]
       return newCoords
 
     default:

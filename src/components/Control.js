@@ -21,31 +21,31 @@ class Control extends React.Component {
     let canvas = ReactDOM.findDOMNode(this.refs.canvas);
     this.stage = new createjs.Stage(canvas);
     let ticks;
-
+    for (let i = 0; i < grid.population.length; i++) {
+      let antDot = new createjs.Shape()
+      antDot.graphics.beginFill("Black").drawCircle(0, 0, 2)
+      // console.log(grid.population[i].coords)
+      antDot.x = grid.population[i].coords[0]
+      antDot.y = grid.population[i].coords[1]
+      grid.population[i].Shape = antDot
+      console.table(antDot)
+      this.stage.addChild(grid.population[i].Shape)
+    }
 
 
 
 
     const handleTick = () => {
-      this.stage.removeAllChildren()
+      // this.stage.removeAllChildren()
       ticks = createjs.Ticker.getTicks()
       console.table(grid.population[0])
       for (let i = 0; i < grid.population.length; i++) {
-        grid.population[i].coords = grid.moveAnt(i)
-      }
-      for (let i = 0; i < grid.population.length; i++) {
-        let antDot = new createjs.Shape()
-        antDot.graphics.beginFill("Black").drawCircle(0, 0, 2)
-        // console.log(grid.population[i].coords)
-        antDot.x = grid.population[i].coords[0]
-        antDot.y = grid.population[i].coords[1]
-        grid.population[i].Shape = antDot
-        console.table(antDot)
-        this.stage.addChild(antDot)
-
+        grid.moveAnt(i)
+        this.stage.update();
       }
 
-      this.stage.update();
+
+
 
 
 
