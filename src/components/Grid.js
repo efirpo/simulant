@@ -6,7 +6,7 @@ export let population = [];
 export let coordArr = [];
 export let tempCoords = [];
 export const gridSize = 300;
-export const maxAnts = 50;
+export const maxAnts = 40;
 export let antsOut = 0;
 
 export const createPopulation = () => {
@@ -47,6 +47,9 @@ export const moveAnt = (i) => {
   }
   switch (population[i].orientation) {
     case 1:
+      // const nestCoords = [gridSize / 2, 0]
+      // let currentCoords = [population[i].Shape.x, population[i].Shape.y]
+      // console.log(calcDistance(currentCoords, nestCoords))
       return [
         createBound(population[i].Shape.x + (Math.ceil(Math.random() * 2))),
         population[i].Shape.y
@@ -104,21 +107,30 @@ export const moveHome = (i) => {
 
   const nestCoords = [gridSize / 2, 0]
   let currentCoords = [population[i].Shape.x, population[i].Shape.y]
-  let targetCoords;
-  for (let i = 0; i < tempCoords.length; i++) {
-    if (tempCoords[i].length < 10) {
+  let targetCoords = [0, 0];
+  // console.log()
+  // console.log("IN MOVE HOME: " + calcDistance(currentCoords, nestCoords))
+  // console.log("---------")
+  for (let i = 0; i < maxAnts; i++) {
+    if (tempCoords[i] === undefined) {
+      tempCoords[i] = [{ coords: [population[i].Shape.x, population[i].Shape.y] }]
+    }
+    else if (tempCoords[i].length < 10) {
       tempCoords[i].push({ coords: [population[i].Shape.x, population[i].Shape.y] })
     } else {
       tempCoords[i].shift()
       tempCoords[i].push({ coords: [population[i].Shape.x, population[i].Shape.y] })
     }
-    console.log(calcDistance(currentCoords, nestCoords))
+
   }
-  //     // do { targetCoords = moveAnt(i) }
-  //     // while (calcDistance(targetCoords, nestCoords) < calcDistance(currentCoords, nestCoords && currentCoords !== [gridSize / 2, 0]))
-  //     // return targetCoords
-  //   }
-  return [gridSize / 2, gridSize / 2]
+  do {
+    let newCoords = moveAnt(i)
+    targetCoords = newCoords
+  }
+  while (calcDistance(targetCoords, nestCoords) > calcDistance(currentCoords, nestCoords) && currentCoords !== [gridSize / 2, 0])
+  return targetCoords
+  // }
+  // return [gridSize / 2, gridSize / 2]
 }
 
 export const createBound = (i) => {
