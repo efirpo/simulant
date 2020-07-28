@@ -1,8 +1,6 @@
 import * as createjs from 'createjs-easeljs';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Ant from './Ant';
-import Cell from './Cell';
 import * as grid from './Grid';
 
 class Control extends React.Component {
@@ -13,7 +11,7 @@ class Control extends React.Component {
 
   componentWillMount() {
     grid.createPopulation()
-
+    grid.createFood()
   }
 
   componentDidMount() {
@@ -30,6 +28,15 @@ class Control extends React.Component {
       grid.population[i].Shape = antDot
       console.table(antDot)
       this.stage.addChild(grid.population[i].Shape)
+    }
+    for (let i = 0; i < grid.foodCoords.length; i++) {
+      let foodDot = new createjs.Shape()
+      foodDot.graphics.beginFill("Red").drawCircle(0, 0, grid.foodCoords[i].scale)
+      foodDot.x = grid.foodCoords[i].coords[0]
+      foodDot.y = grid.foodCoords[i].coords[1]
+      grid.foodCoords[i].Shape = foodDot
+
+      this.stage.addChild(grid.foodCoords[i].Shape)
     }
 
 

@@ -1,25 +1,33 @@
-import Cell from './Cell';
+import Food from './Food';
 import Ant from './Ant';
 
 
 export let population = [];
-export let coordArr = [];
+export let foodCoords = [];
 export let tempCoords = [];
 export const gridSize = 300;
-export const maxAnts = 40;
+export const maxAnts = 50;
 export let antsOut = 0;
+export const maxFood = 5
 
 export const createPopulation = () => {
   for (let i = 0; i <= maxAnts; i++) {
     let newAnt = new Ant();
-    let coinFlip = Math.ceil(Math.random() * 2)
-    if (coinFlip === 1) {
-      newAnt.carryingFood = true;
-    }
+    // let coinFlip = Math.ceil(Math.random() * 2)
+    // if (coinFlip === 1) {
+    //   newAnt.carryingFood = true;
+    // }
     newAnt.coords = [gridSize / 2, gridSize / 2]
     // newAnt.carryingFood = true;
     population[i] = newAnt;
 
+  }
+}
+
+export const createFood = () => {
+  for (let i = 0; i < maxFood; i++) {
+    let newFood = new Food();
+    foodCoords[i] = newFood
   }
 }
 
@@ -124,8 +132,7 @@ export const moveHome = (i) => {
 
   }
   do {
-    let newCoords = moveAnt(i)
-    targetCoords = newCoords
+    targetCoords = moveAnt(i)
   }
   while (calcDistance(targetCoords, nestCoords) > calcDistance(currentCoords, nestCoords) && currentCoords !== [gridSize / 2, 0])
   return targetCoords
