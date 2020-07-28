@@ -24,6 +24,7 @@ class Control extends React.Component {
 
 
     const handleTick = () => {
+      this.stage.removeAllChildren()
       ticks = createjs.Ticker.getTicks()
       console.table(grid.population)
       for (let i = 0; i < grid.population.length; i++) {

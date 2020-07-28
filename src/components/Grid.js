@@ -6,7 +6,7 @@ export let population = [];
 export let coordArr = [];
 export let tempCoords = [];
 export const gridSize = 400;
-export const maxAnts = 50;
+export const maxAnts = 110;
 export let antsOut = 0;
 
 export const createPopulation = () => {
@@ -16,58 +16,75 @@ export const createPopulation = () => {
     population[i] = newAnt;
   }
 }
-let pickDirection = () => {
-  return Math.ceil(Math.random() * 8)
-}
+
+
 export const moveAnt = (i) => {
-  let caseNum = pickDirection()
-  let newCoords;
-  switch (caseNum) {
+  let changeDirection = Math.ceil(Math.random() * 3)
+  switch (changeDirection) {
     case 1:
-      newCoords = [population[i].coords[0] += 3,
+      if (population[i].orientation == 8) {
+        population[i].orientation = 1
+      } else {
+        population[i].orientation += 1
+      }
+      break
+    case 2:
+      break
+    case 3:
+      if (population[i].orientation == 1) {
+        population[i].orientation = 8
+      } else {
+        population[i].orientation -= 1
+      }
+
+  }
+  let newCoords;
+  switch (population[i].orientation) {
+    case 1:
+      newCoords = [createBound(population[i].coords[0] += 1),
       population[i].coords[1] += 0]
       return newCoords
 
     case 2:
-      newCoords = [
-        population[i].coords[0] += 3,
-        population[i].coords[1] += 3]
+      newCoords = [createBound(
+        population[i].coords[0] += 1),
+      createBound(population[i].coords[1] += 1)]
       return newCoords
 
     case 3:
       newCoords = [
         population[i].coords[0] += 0,
-        population[i].coords[1] += 3]
+        createBound(population[i].coords[1] += 1)]
       return newCoords
 
     case 4:
-      newCoords = [
-        population[i].coords[0] -= 3,
-        population[i].coords[1] += 3]
+      newCoords = [createBound(
+        population[i].coords[0] -= 1),
+      createBound(population[i].coords[1] += 1)]
       return newCoords
 
     case 5:
-      newCoords = [
-        population[i].coords[0] -= 3,
-        population[i].coords[0] += 0]
+      newCoords = [createBound(
+        population[i].coords[0] -= 1),
+      population[i].coords[0] += 0]
       return newCoords
 
     case 6:
-      newCoords = [
-        population[i].coords[0] -= 3,
-        population[i].coords[0] -= 3]
+      newCoords = [createBound(
+        population[i].coords[0] -= 1),
+      createBound(population[i].coords[1] -= 1)]
       return newCoords
 
     case 7:
       newCoords = [
         population[i].coords[0] += 0,
-        population[i].coords[1] -= 3]
+        createBound(population[i].coords[1] -= 1)]
       return newCoords
 
     case 8:
-      newCoords = [
-        population[i].coords[0] += 3,
-        population[i].coords[1] -= 3]
+      newCoords = [createBound(
+        population[i].coords[0] += 1),
+      createBound(population[i].coords[1] -= 1)]
       return newCoords
 
     default:
@@ -86,17 +103,20 @@ export const createGrid = () => {
   }
 }
 
-export const createRandomNum = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1));
+export const createRandomNum = () => {
+
+  return Math.floor(Math.random() * 3);
 }
 
 export const createRandomCoords = (x, y) => {
-  let a = createRandomNum(x + 1, x + gridSize);
-  let b = createRandomNum(y + 1, y + gridSize);
+
+  let a = createRandomNum() + x;
+  let b = createRandomNum() + y;
   let z = createBound(a);
   let q = createBound(b);
   return [z, q]
 }
+
 export const createBound = (i) => {
   let bound = i;
   if (i < 0) {

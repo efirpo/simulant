@@ -5,11 +5,6 @@ export class Cell {
     this.ant = null;
     this.food = 0;
     this.signal = 0;
-    this.hasAnt = function () {
-      if (this.ant) {
-        return true
-      } else { return false }
-    };
   }
 }
 export default Cell
