@@ -5,4 +5,5 @@ export default function Ant() {
   this.coords = []
   this.trail = []
   this.Shape = {}
+  this.movingHome = false
 }

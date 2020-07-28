@@ -38,12 +38,22 @@ class Control extends React.Component {
     const handleTick = () => {
       // this.stage.removeAllChildren()
       ticks = createjs.Ticker.getTicks()
-      console.table(grid.population[0])
+      // console.table(grid.population[0])
       for (let i = 0; i < grid.population.length; i++) {
-        grid.moveAnt(i)
-        this.stage.update();
+        if (!grid.population[i].carryingFood) {
+          // console.log(grid.population[i].carryingFood)
+          let newCoords = grid.moveAnt(i)
+          grid.population[i].Shape.x = newCoords[0]
+          grid.population[i].Shape.y = newCoords[1]
+          this.stage.update();
+        }
+        else if (grid.population[i].carryingFood) {
+          let newCoords = grid.moveHome(i)
+          grid.population[i].Shape.x = newCoords[0]
+          grid.population[i].Shape.y = newCoords[1]
+          this.stage.update();
+        }
       }
-
 
 
 
@@ -69,7 +79,7 @@ class Control extends React.Component {
     // }
     // circle.on("click", handleCircleClick)
 
-    createjs.Ticker.setFPS(30)
+    createjs.Ticker.setFPS(20)
     createjs.Ticker.addEventListener("tick", handleTick)
 
 

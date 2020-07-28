@@ -6,14 +6,20 @@ export let population = [];
 export let coordArr = [];
 export let tempCoords = [];
 export const gridSize = 300;
-export const maxAnts = 60;
+export const maxAnts = 50;
 export let antsOut = 0;
 
 export const createPopulation = () => {
   for (let i = 0; i <= maxAnts; i++) {
     let newAnt = new Ant();
+    let coinFlip = Math.ceil(Math.random() * 2)
+    if (coinFlip === 1) {
+      newAnt.carryingFood = true;
+    }
     newAnt.coords = [gridSize / 2, gridSize / 2]
+    // newAnt.carryingFood = true;
     population[i] = newAnt;
+
   }
 }
 
@@ -39,82 +45,95 @@ export const moveAnt = (i) => {
       }
 
   }
-  let newCoords;
   switch (population[i].orientation) {
     case 1:
-      newCoords = [
-        createBound(population[i].Shape.x += (Math.ceil(Math.random() * 2))),
-        population[i].Shape.y]
-      return newCoords
+      return [
+        createBound(population[i].Shape.x + (Math.ceil(Math.random() * 2))),
+        population[i].Shape.y
+      ]
 
     case 2:
-      newCoords = [
-        createBound(population[i].Shape.x += 1),
-        createBound(population[i].Shape.y += 1)]
-      return newCoords
+      return [
+        createBound(population[i].Shape.x + 1),
+        createBound(population[i].Shape.y + 1)
+      ]
 
     case 3:
-      newCoords = [
+      return [
         population[i].Shape.x,
-        createBound(population[i].Shape.y += (Math.ceil(Math.random() * 2)))]
-      return newCoords
+        createBound(population[i].Shape.y + (Math.ceil(Math.random() * 2)))
+      ]
 
     case 4:
-      newCoords = [
-        createBound(population[i].Shape.x -= 1),
-        createBound(population[i].Shape.y += 1)]
-      return newCoords
+      return [
+        createBound(population[i].Shape.x - 1),
+        createBound(population[i].Shape.y + 1)
+      ]
 
     case 5:
-      newCoords = [
-        createBound(population[i].Shape.x -= (Math.ceil(Math.random() * 2))),
-        population[i].Shape.y]
-      return newCoords
+      return [
+        createBound(population[i].Shape.x - (Math.ceil(Math.random() * 2))),
+        population[i].Shape.y
+      ]
 
     case 6:
-      newCoords = [
-        createBound(population[i].Shape.x -= 1),
-        createBound(population[i].Shape.y -= 1)]
-      return newCoords
+      return [
+        createBound(population[i].Shape.x - 1),
+        createBound(population[i].Shape.y - 1)
+      ]
+
 
     case 7:
-      newCoords = [
+      return [
         population[i].Shape.x,
-        createBound(population[i].Shape.y -= (Math.ceil(Math.random() * 2)))]
-      return newCoords
+        createBound(population[i].Shape.y - (Math.ceil(Math.random() * 2)))
+      ]
 
     case 8:
-      newCoords = [
-        createBound(population[i].Shape.x += 1),
-        createBound(population[i].Shape.y -= 1)]
-      return newCoords
+      return [
+        createBound(population[i].Shape.x + 1),
+        createBound(population[i].Shape.y - 1)
+      ]
 
     default:
       return null
   }
 }
 
-export const createGrid = () => {
-  for (let x = 0; x < gridSize; x++) {
-    coordArr[x] = [];
-    tempCoords[x] = [];
-    for (let y = 0; y < gridSize; y++) {
-      coordArr[x][y] = new Cell(x, y);
-      tempCoords[x][y] = new Cell(x, y)
+export const moveHome = (i) => {
+
+  const nestCoords = [gridSize / 2, 0]
+  let currentCoords = [population[i].Shape.x, population[i].Shape.y]
+  let targetCoords;
+  for (let i = 0; i < tempCoords.length; i++) {
+    if (tempCoords[i].length < 10) {
+      tempCoords[i].push({ coords: [population[i].Shape.x, population[i].Shape.y] })
+    } else {
+      tempCoords[i].shift()
+      tempCoords[i].push({ coords: [population[i].Shape.x, population[i].Shape.y] })
     }
+    console.log(calcDistance(currentCoords, nestCoords))
   }
+  //     // do { targetCoords = moveAnt(i) }
+  //     // while (calcDistance(targetCoords, nestCoords) < calcDistance(currentCoords, nestCoords && currentCoords !== [gridSize / 2, 0]))
+  //     // return targetCoords
+  //   }
+  return [gridSize / 2, gridSize / 2]
 }
 
 export const createBound = (i) => {
-  let bound = i;
-  if (i < 0) {
-    bound = 0
+  if (i <= 0) {
+    i = 0
   }
   if (i >= gridSize) {
-    bound = gridSize
+    i = gridSize
   }
-  return bound
+  return i
 
+}
+
+export const calcDistance = ([x, y], [a, b]) => {
+  return Math.pow(Math.pow(Math.abs(x - a), 2) + Math.pow(Math.abs(y - b), 2), 0.5);
 }
 
 // export const spawnFood = () => {
