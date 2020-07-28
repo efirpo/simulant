@@ -13,6 +13,7 @@ class Control extends React.Component {
 
   componentWillMount() {
     grid.createPopulation()
+
   }
 
   componentDidMount() {
@@ -23,22 +24,27 @@ class Control extends React.Component {
 
 
 
+
+
     const handleTick = () => {
       this.stage.removeAllChildren()
       ticks = createjs.Ticker.getTicks()
-      console.table(grid.population)
+      console.table(grid.population[0])
       for (let i = 0; i < grid.population.length; i++) {
         grid.population[i].coords = grid.moveAnt(i)
       }
       for (let i = 0; i < grid.population.length; i++) {
         let antDot = new createjs.Shape()
         antDot.graphics.beginFill("Black").drawCircle(0, 0, 2)
-        console.log(grid.population[i].coords[0])
+        // console.log(grid.population[i].coords)
         antDot.x = grid.population[i].coords[0]
         antDot.y = grid.population[i].coords[1]
+        grid.population[i].Shape = antDot
+        console.table(antDot)
         this.stage.addChild(antDot)
 
       }
+
       this.stage.update();
 
 
@@ -63,7 +69,7 @@ class Control extends React.Component {
     // }
     // circle.on("click", handleCircleClick)
 
-    createjs.Ticker.setFPS(15)
+    createjs.Ticker.setFPS(30)
     createjs.Ticker.addEventListener("tick", handleTick)
 
 

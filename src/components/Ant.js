@@ -4,4 +4,5 @@ export default function Ant() {
   this.orientation = Math.ceil(Math.random() * 8);
   this.coords = []
   this.trail = []
+  this.Shape = {}
 }
