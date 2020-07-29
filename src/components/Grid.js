@@ -3,13 +3,13 @@ import Ant from './Ant';
 
 
 export let population = [];
-export const nestCoords = [100, 0]
+export const nestCoords = [20, 0]
 export let foodCoords = [];
 export let trails = [];
-export const gridSize = 150;
-export const maxAnts = 50;
+export const gridSize = 200;
+export const maxAnts = 5;
 export let antsOut = 0;
-export const maxFood = 5
+export const maxFood = 3
 
 export const createPopulation = () => {
   for (let i = 0; i <= maxAnts; i++) {
@@ -120,16 +120,32 @@ export const wanderHome = (i) => {
   // return [gridSize / 2, gridSize / 2]
 }
 
-export const moveToHome = () => {
+export const moveToHome = (i) => {
+  population[i].Shape.x = population[i].trail[0][0]
+  population[i].Shape.y = population[i].trail[0][1]
+  let shiftCoords = population[i].trail.shift()
+  population[i].trail.push(shiftCoords)
 
 }
 
-export const moveToFood = () => {
-
+export const moveToFood = (i) => {
+  population[i].Shape.x = population[i].trail[population[i].trail.length - 1][0]
+  population[i].Shape.y = population[i].trail[population[i].trail.length - 1][1]
+  let shiftCoords = population[i].trail.pop()
+  population[i].trail.unshift(shiftCoords)
 }
 
-export const makeTrail = () => {
+export const makeTrail = (i) => {
+  population[i].trail.push([population[i].Shape.x, population[i].Shape.y])
+}
 
+export const checkForTrail = (i) => {
+  for (let j = 0; j < trails.length; j++) {
+    if (trails[j].includes([population[i].Shape.x, population[i].Shape.y])) {
+      population[i].trail = trails[j]
+      population[i].followingTrail = true
+    }
+  }
 }
 
 // export const moveToFood = (i) => {

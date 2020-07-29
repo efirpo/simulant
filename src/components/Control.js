@@ -57,6 +57,7 @@ class Control extends React.Component {
             grid.population[i].Shape.graphics.clear().beginFill("red").drawCircle(0, 0, 2)
             this.stage.addChildAt(grid.population[i].Shape, i)
             grid.foodCoords[j].Shape.alpha -= (1 / grid.foodCoords[j].scale)
+            // if food is too light, remove food dot and replace at random spot 
             if (grid.foodCoords[j].Shape.alpha <= (1 / grid.foodCoords[j].scale)) {
               this.stage.removeChildAt(j + (grid.maxAnts))
               grid.foodCoords[j].Shape.x = Math.ceil(Math.random() * (grid.gridSize - 5))
@@ -70,43 +71,49 @@ class Control extends React.Component {
           }
           // this.stage.update();
         }
+        // if carrying food and close to home, drop food, check if following a trail already.
         if (grid.population[i].carryingFood && grid.calcDistance(currentCoords, grid.nestCoords) < 4) {
           grid.population[i].carryingFood = false
           this.stage.removeChildAt(i)
           grid.population[i].Shape.graphics.clear().beginFill("Black").drawCircle(0, 0, 2)
           this.stage.addChildAt(grid.population[i].Shape, i)
           if (!grid.population[i].followingTrail) {
-            grid.population[i].folowingTrail = true
+            grid.population[i].followingTrail = true
           }
           if (grid.trails.length < 9) {
             grid.trails.push(grid.population[i].trail)
           }
           // this.stage.update();
         }
+        // if following a trail, check if carryingFood and move appropriately
         if (grid.population[i].followingTrail) {
           if (!grid.population[i].carryingFood) {
-            let newCoords = grid.moveToFood(i)
-            grid.population[i].Shape.x = newCoords[0]
-            grid.population[i].Shape.y = newCoords[1]
+            // let newCoords = 
+            grid.moveToFood(i)
+            // grid.population[i].Shape.x = newCoords[0]
+            // grid.population[i].Shape.y = newCoords[1]
           } else {
-            let newCoords = grid.moveToHome(i)
-            grid.population[i].Shape.x = newCoords[0]
-            grid.population[i].Shape.y = newCoords[1]
+            // let newCoords = 
+            grid.moveToHome(i)
+            // grid.population[i].Shape.x = newCoords[0]
+            // grid.population[i].Shape.y = newCoords[1]
           }
-          // this.stage.update();
+
         }
+        // if not following a trail but carrying food, wander home
         else if (!grid.population[i].followingTrail && grid.population[i].carryingFood) {
           let newCoords = grid.wanderHome(i)
           grid.population[i].Shape.x = newCoords[0]
           grid.population[i].Shape.y = newCoords[1]
           grid.makeTrail(i)
-          // this.stage.update();
+
         }
+        // if not following a trail, and not carrying food, wander
         else if (!grid.population[i].followingTrail && !grid.population[i].carryingFood) {
           let newCoords = grid.wanderAnt(i)
           grid.population[i].Shape.x = newCoords[0]
           grid.population[i].Shape.y = newCoords[1]
-          // this.stage.update();
+          grid.checkForTrail(i)
         }
         this.stage.update();
       }
