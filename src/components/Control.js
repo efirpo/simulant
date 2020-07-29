@@ -42,26 +42,18 @@ class Control extends React.Component {
       ticks = createjs.Ticker.getTicks()
       if (ticks === 100) {
         console.log("100 ticks:")
-        console.table(grid.tempCoords)
+        console.table(grid.trails)
 
       }
-      // update Ants
+      // loop through and update Ants
       for (let i = 0; i < grid.population.length; i++) {
         let currentCoords = [grid.population[i].Shape.x, grid.population[i].Shape.y]
 
-        // drop off food at the Nest.
-        if (grid.population[i].carryingFood && grid.calcDistance(currentCoords, grid.nestCoords) < 8) {
-          grid.population[i].carryingFood = false
-          this.stage.removeChildAt(i)
-          grid.population[i].Shape.graphics.clear().beginFill("Black").drawCircle(0, 0, 2)
-          // let newCoords = grid.moveToFood(i);
-          // grid.population[i].Shape.x = newCoords[0]
-          // grid.population[i].Shape.y = newCoords[1]
-          this.stage.addChildAt(grid.population[i].Shape, i)
+        if (grid.population[i].followingTrail) {
 
         }
-        // if not carrying food, move randomly
-        else if (!grid.population[i].carryingFood) {
+        // if not carrying food, and not following trail, move randomly
+        if (!grid.population[i].carryingFood) {
           let newCoords = grid.moveAnt(i)
           grid.population[i].Shape.x = newCoords[0]
           grid.population[i].Shape.y = newCoords[1]
@@ -70,17 +62,16 @@ class Control extends React.Component {
             // if close to food, gather food, replace stage child with new color graphic
             if (grid.calcDistance(newCoords, grid.foodCoords[j].coords) < (grid.foodCoords[j].scale + 4)) {
               grid.population[i].carryingFood = true
-              console.log(grid.foodCoords[j].coords)
-              // grid.population[i].target = grid.foodCoords[j].coords
               this.stage.removeChildAt(i)
               grid.population[i].Shape.graphics.clear().beginFill("red").drawCircle(0, 0, 2)
               this.stage.addChildAt(grid.population[i].Shape, i)
               grid.foodCoords[j].scale -= 1
+              grid.population[i].followingTrail = false;
+
 
               // if food becomes very small, remove food and replace it's index in the stage with a new food dot.
               if (grid.foodCoords[j].scale <= 4) {
                 this.stage.removeChildAt(j + (grid.maxAnts))
-                // grid.population[i].target = null
                 grid.foodCoords[j].Shape.x = Math.ceil(Math.random() * (grid.gridSize - 5))
                 grid.foodCoords[j].Shape.y = Math.ceil(Math.random() * (grid.gridSize - 5))
                 grid.foodCoords[j].scale += Math.ceil((Math.random() * 10) + 7)
@@ -88,9 +79,7 @@ class Control extends React.Component {
                 grid.foodCoords[j].Shape.graphics.clear().beginFill("brown").drawCircle(0, 0, grid.foodCoords[j].scale)
                 this.stage.addChildAt(grid.foodCoords[j].Shape, j + (grid.maxAnts))
               } // otherwise change scale of foodDot in reaction to nom-nom.
-              else {
-                grid.foodCoords[j].scale -= 1
-              }
+
               grid.foodCoords[j].Shape.graphics.clear().beginFill("brown").drawCircle(0, 0, grid.foodCoords[j].scale)
             }
           }
@@ -103,7 +92,19 @@ class Control extends React.Component {
           let newCoords = grid.moveHome(i)
           grid.population[i].Shape.x = newCoords[0]
           grid.population[i].Shape.y = newCoords[1]
+          grid.population[i].trail.push(newCoords)
           this.stage.update();
+          // if close to nest, drop off food
+          if (grid.calcDistance(currentCoords, grid.nestCoords) < 4) {
+            grid.population[i].carryingFood = false
+            this.stage.removeChildAt(i)
+            grid.population[i].Shape.graphics.clear().beginFill("Black").drawCircle(0, 0, 2)
+            this.stage.addChildAt(grid.population[i].Shape, i)
+            //if first time home thus not yet following the trail, follow the trail
+            if (!grid.population[i].followingTrail) {
+              grid.population[i].followingTrail = true
+            }
+          }
         }
       }
 

@@ -5,7 +5,7 @@ import Ant from './Ant';
 export let population = [];
 export const nestCoords = [100, 0]
 export let foodCoords = [];
-export let tempCoords = [];
+export let trails = [];
 export const gridSize = 150;
 export const maxAnts = 50;
 export let antsOut = 0;
