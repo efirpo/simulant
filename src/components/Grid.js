@@ -3,25 +3,19 @@ import Ant from './Ant';
 
 
 export let population = [];
-export const nestCoords = [200, 50]
+export const nestCoords = [100, 0]
 export let foodCoords = [];
 export let tempCoords = [];
-export const gridSize = 400;
-export const maxAnts = 80;
+export const gridSize = 150;
+export const maxAnts = 50;
 export let antsOut = 0;
 export const maxFood = 10
 
 export const createPopulation = () => {
   for (let i = 0; i <= maxAnts; i++) {
     let newAnt = new Ant();
-    // let coinFlip = Math.ceil(Math.random() * 2)
-    // if (coinFlip === 1) {
-    //   newAnt.carryingFood = true;
-    // }
     newAnt.coords = nestCoords
-    // newAnt.carryingFood = true;
     population[i] = newAnt;
-
   }
 }
 
@@ -36,7 +30,6 @@ export const replaceFood = (index) => {
   let newFood = new Food();
   foodCoords[index] = newFood
 }
-
 
 
 export const moveAnt = (i) => {
@@ -62,55 +55,52 @@ export const moveAnt = (i) => {
   }
   switch (population[i].orientation) {
     case 1:
-      // const nestCoords = [gridSize / 2, 0]
-      // let currentCoords = [population[i].Shape.x, population[i].Shape.y]
-      // console.log(calcDistance(currentCoords, nestCoords))
       return [
-        createBound(population[i].Shape.x + (Math.ceil(Math.random() * 2))),
+        createBound(population[i].Shape.x + (Math.ceil(Math.random() * 4))),
         population[i].Shape.y
       ]
 
     case 2:
       return [
-        createBound(population[i].Shape.x + 1),
-        createBound(population[i].Shape.y + 1)
+        createBound(population[i].Shape.x + 2),
+        createBound(population[i].Shape.y + 2)
       ]
 
     case 3:
       return [
         population[i].Shape.x,
-        createBound(population[i].Shape.y + (Math.ceil(Math.random() * 2)))
+        createBound(population[i].Shape.y + (Math.ceil(Math.random() * 4)))
       ]
 
     case 4:
       return [
-        createBound(population[i].Shape.x - 1),
-        createBound(population[i].Shape.y + 1)
+        createBound(population[i].Shape.x - 2),
+        createBound(population[i].Shape.y + 2)
       ]
 
     case 5:
       return [
-        createBound(population[i].Shape.x - (Math.ceil(Math.random() * 2))),
+        createBound(population[i].Shape.x - (Math.ceil(Math.random() * 4))),
         population[i].Shape.y
       ]
 
     case 6:
       return [
-        createBound(population[i].Shape.x - 1),
-        createBound(population[i].Shape.y - 1)
+        createBound(population[i].Shape.x - 2),
+        createBound(population[i].Shape.y - 2)
       ]
 
 
     case 7:
       return [
         population[i].Shape.x,
-        createBound(population[i].Shape.y - (Math.ceil(Math.random() * 2)))
+        createBound(population[i].Shape.y - (Math.ceil(Math.random() * 4)))
       ]
 
     case 8:
       return [
-        createBound(population[i].Shape.x + 1),
-        createBound(population[i].Shape.y - 1)
+        createBound(population[i].Shape.x + 2),
+        createBound(population[i].Shape.y - 2)
       ]
 
     default:
@@ -121,26 +111,54 @@ export const moveAnt = (i) => {
 export const moveHome = (i) => {
   let currentCoords = [population[i].Shape.x, population[i].Shape.y]
   let targetCoords = [0, 0];
-  for (let i = 0; i < maxAnts; i++) {
-    if (tempCoords[i] === undefined) {
-      tempCoords[i] = [{ coords: [population[i].Shape.x, population[i].Shape.y] }]
-    }
-    else if (tempCoords[i].length < 10) {
-      tempCoords[i].push({ coords: [population[i].Shape.x, population[i].Shape.y] })
-    } else {
-      tempCoords[i].shift()
-      tempCoords[i].push({ coords: [population[i].Shape.x, population[i].Shape.y] })
-    }
-
-  }
   do {
     targetCoords = moveAnt(i)
   }
-  while (calcDistance(targetCoords, nestCoords) > calcDistance(currentCoords, nestCoords) && currentCoords !== nestCoords)
+  while (Math.floor(calcDistance(targetCoords, nestCoords)) >= Math.floor(calcDistance(currentCoords, nestCoords)))
   return targetCoords
   // }
   // return [gridSize / 2, gridSize / 2]
 }
+
+// export const moveToFood = (i) => {
+//   let currentCoords = [population[i].Shape.x, population[i].Shape.y]
+//   let targetCoords = [0, 0];
+//   do {
+//     targetCoords = moveAnt(i)
+//   } while (
+//     Math.floor(calcDistance(targetCoords, population[i].target)) >= Math.floor(calcDistance(currentCoords, population[i].target))
+//   )
+//   return targetCoords
+// }
+
+// export const makeTrail = (i) => {
+//   if (tempCoords[i] === undefined) {
+//     tempCoords[i] = [[population[i].Shape.x, population[i].Shape.y]]
+//   }
+//   else if (tempCoords[i].length < 25) {
+//     tempCoords[i].push([population[i].Shape.x, population[i].Shape.y])
+//   } else {
+//     tempCoords[i].shift()
+//     tempCoords[i].push([population[i].Shape.x, population[i].Shape.y])
+//   }
+// }
+
+// export const checkForTrail = (i) => {
+//   for (let j = 0; j < maxAnts; j++) {
+//     if (tempCoords[j] === undefined) { }
+//     else if (tempCoords[j].includes([population[i].Shape.x, population[i].Shape.y])) {
+
+//       population[i].trail = tempCoords[j]
+
+//       //   population[i].Shape.x = population[i].trail[population[i].trail.length - 2][0]
+//       //   population[i].Shape.y = population[i].trail[population[i].trail.length - 2][1]
+//       // }
+//       // console.log(population[i].trail)
+//     }
+
+//   }
+// }
+
 
 export const createBound = (i) => {
   if (i <= 0) {
@@ -156,11 +174,3 @@ export const createBound = (i) => {
 export const calcDistance = ([x, y], [a, b]) => {
   return Math.pow(Math.pow(Math.abs(x - a), 2) + Math.pow(Math.abs(y - b), 2), 0.5);
 }
-
-// export const spawnFood = () => {
-//   let newCoords = createRandomCoords(0, 0);
-//   var a = newCoords[0]
-//   var b = newCoords[1];
-//   coordArr[a][b].food = Math.random() * 1.5
-
-// }
