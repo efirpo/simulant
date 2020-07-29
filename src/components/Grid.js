@@ -3,12 +3,13 @@ import Ant from './Ant';
 
 
 export let population = [];
+export const nestCoords = [200, 50]
 export let foodCoords = [];
 export let tempCoords = [];
-export const gridSize = 300;
-export const maxAnts = 50;
+export const gridSize = 400;
+export const maxAnts = 80;
 export let antsOut = 0;
-export const maxFood = 5
+export const maxFood = 10
 
 export const createPopulation = () => {
   for (let i = 0; i <= maxAnts; i++) {
@@ -17,7 +18,7 @@ export const createPopulation = () => {
     // if (coinFlip === 1) {
     //   newAnt.carryingFood = true;
     // }
-    newAnt.coords = [gridSize / 2, gridSize / 2]
+    newAnt.coords = nestCoords
     // newAnt.carryingFood = true;
     population[i] = newAnt;
 
@@ -30,6 +31,12 @@ export const createFood = () => {
     foodCoords[i] = newFood
   }
 }
+
+export const replaceFood = (index) => {
+  let newFood = new Food();
+  foodCoords[index] = newFood
+}
+
 
 
 export const moveAnt = (i) => {
@@ -112,13 +119,8 @@ export const moveAnt = (i) => {
 }
 
 export const moveHome = (i) => {
-
-  const nestCoords = [gridSize / 2, 0]
   let currentCoords = [population[i].Shape.x, population[i].Shape.y]
   let targetCoords = [0, 0];
-  // console.log()
-  // console.log("IN MOVE HOME: " + calcDistance(currentCoords, nestCoords))
-  // console.log("---------")
   for (let i = 0; i < maxAnts; i++) {
     if (tempCoords[i] === undefined) {
       tempCoords[i] = [{ coords: [population[i].Shape.x, population[i].Shape.y] }]
@@ -134,7 +136,7 @@ export const moveHome = (i) => {
   do {
     targetCoords = moveAnt(i)
   }
-  while (calcDistance(targetCoords, nestCoords) > calcDistance(currentCoords, nestCoords) && currentCoords !== [gridSize / 2, 0])
+  while (calcDistance(targetCoords, nestCoords) > calcDistance(currentCoords, nestCoords) && currentCoords !== nestCoords)
   return targetCoords
   // }
   // return [gridSize / 2, gridSize / 2]
