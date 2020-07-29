@@ -9,7 +9,7 @@ export let trails = [];
 export const gridSize = 150;
 export const maxAnts = 50;
 export let antsOut = 0;
-export const maxFood = 10
+export const maxFood = 5
 
 export const createPopulation = () => {
   for (let i = 0; i <= maxAnts; i++) {
@@ -32,7 +32,7 @@ export const replaceFood = (index) => {
 }
 
 
-export const moveAnt = (i) => {
+export const wanderAnt = (i) => {
   let changeDirection = Math.ceil(Math.random() * 4)
   switch (changeDirection) {
     case 1:
@@ -108,16 +108,28 @@ export const moveAnt = (i) => {
   }
 }
 
-export const moveHome = (i) => {
+export const wanderHome = (i) => {
   let currentCoords = [population[i].Shape.x, population[i].Shape.y]
   let targetCoords = [0, 0];
   do {
-    targetCoords = moveAnt(i)
+    targetCoords = wanderAnt(i)
   }
   while (Math.floor(calcDistance(targetCoords, nestCoords)) >= Math.floor(calcDistance(currentCoords, nestCoords)))
   return targetCoords
   // }
   // return [gridSize / 2, gridSize / 2]
+}
+
+export const moveToHome = () => {
+
+}
+
+export const moveToFood = () => {
+
+}
+
+export const makeTrail = () => {
+
 }
 
 // export const moveToFood = (i) => {
