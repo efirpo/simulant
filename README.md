@@ -25,7 +25,7 @@ Currently, Simul*ant* only simulates foraging behavior among ants, but is in pro
 
 ## Technology
 
-This project is currently built in JavaScript, using React.js as a framework for the eventual web site where these simulations will be hosted.
+This project is currently built in JavaScript, using React.js as a framework for the eventual web site where these simulations will be hosted. CreateJs, specifically the EaselJs sub-library(https://www.createjs.com/easeljs), was used to draw the simulation.
 
 ## Known Bugs
 
