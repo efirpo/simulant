@@ -38,16 +38,6 @@ class Control extends React.Component {
 
     // updates the children in the stage every frame
     const handleTick = () => {
-
-      ticks = createjs.Ticker.getTicks()
-      if (ticks % 400 == 0) {
-        // let antsFollowing = grid.population.filter((e) => { return e.followingTrail })
-        // console.log("ANT 0: ")
-        // console.table(grid.trails)
-        // console.log("100 ticks:")
-        // console.table(grid.foodCoords)
-
-      }
       // loop through and update Ants
       for (let i = 0; i < grid.population.length; i++) {
         let currentCoords = [grid.population[i].Shape.x, grid.population[i].Shape.y]
@@ -149,7 +139,7 @@ class Control extends React.Component {
       }
     }
 
-    createjs.Ticker.setFPS(35)
+    createjs.Ticker.setFPS(20)
     createjs.Ticker.addEventListener("tick", handleTick)
   }
 

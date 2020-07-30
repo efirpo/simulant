@@ -3,11 +3,11 @@ import Ant from './Ant';
 
 
 export let population = [];
-export const nestCoords = [20, 0]
+export const nestCoords = [125, 0]
 export let foodCoords = [];
 export let trails = [];
 export const gridSize = 250;
-export const maxAnts = 80;
+export const maxAnts = 90;
 export let antsOut = 0;
 export const maxFood = 5
 
