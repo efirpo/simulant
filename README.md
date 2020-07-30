@@ -7,7 +7,8 @@ Simul*ant* is the beginning of a project that will showcase many different simul
 
 Ants have been chosen as the first simulation to happen because ant behavior is famously an example of emergent behavior -- complexity arising based upon simple rules that each agent in a group follows -- allowing an ant colony to exhibit far more complex and evolutionarily advantageous behavior than any individual ant does on its own, or even is aware of happening in their daily life. As such modeling this behavior is relatively simple, compared to other examples of animal behavior, and the results are often mesmerizing. This made ants a perfect place to start.
 
-Currently, Simul*ant* only simulates foraging behavior among ants, but is in process to eventually include a whole colony, both above and below ground. Several refactorings will likely be necessary to acheive this goal.
+Currently, Simul*ant* only simulates foraging behavior among ants, but is in process to eventually include a whole colony, both above and below ground. Several re-factorings will likely be necessary to achieve this goal. At time being, dark-red dots represent food, black dots represents ants, and bright-red dots represent ants carrying food. 
+
 
 ## Future Goals
 (as of July 2020)
@@ -15,6 +16,7 @@ Currently, Simul*ant* only simulates foraging behavior among ants, but is in pro
 - Simulate in-nest ant colony behavior.
 - Simulate further context for the ant colony's environment.
 - Allow users to store and revisit ant colonies.
+- Allow users to determine environmental and behavioral parameters (speed, strength of pheromones, amount of food available, etc)
 - Allow users to interact with ants (feeding, obstruction-removal, etc)
 
 ### Other simulations planned:
