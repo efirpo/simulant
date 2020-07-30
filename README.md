@@ -17,7 +17,7 @@ Currently, Simul*ant* only simulates foraging behavior among ants, but is in pro
 - Allow users to store and revisit ant colonies.
 - Allow users to interact with ants (feeding, obstruction-removal, etc)
 
-### Other behavioral simulations planned:
+### Other simulations planned:
 - Simulate bee colony behavior.
 - Simulate orb-weaver spider web-building behavior.
 - Simulate galactic colonization on cosmological time-scales(an exploration of the Fermi Paradox)
