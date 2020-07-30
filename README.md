@@ -1,13 +1,13 @@
-__SIMULANT__
+__SIMUL*ANT*__
 initialized July 17th, 2020, by Ethan Alexander Firpo
 
 ## Description
 
-Simulant is the beginning of a project that will showcase many different simulations of animal behavior, natural phenomena, and other algorithmically interesting things to simulate. The goal of this project is to encourage interest in the sciences and programming through the showcasing of what is possible with just a little applied logic.
+Simul*ant* is the beginning of a project that will showcase many different simulations of animal behavior, natural phenomena, and other algorithmically interesting things to simulate. The goal of this project is to encourage interest in the sciences and programming through the showcasing of what is possible with just a little applied logic.
 
-Ants have been chosen as the first simulation to happen because ant behavior is famously an example of complexity arising based upon simple rules that each agent in a group follows, allowing an ant colony to exhibit far more complex and evolutionarily advantageous behavior than any individual ant could on its own, or even is aware of happening in their daily life. As such modeling this behavior is relatively simple, and the results are often mesmerizing. This made ants a perfect place to start.
+Ants have been chosen as the first simulation to happen because ant behavior is famously an example of emergent behavior -- complexity arising based upon simple rules that each agent in a group follows -- allowing an ant colony to exhibit far more complex and evolutionarily advantageous behavior than any individual ant does on its own, or even is aware of happening in their daily life. As such modeling this behavior is relatively simple, compared to other examples of animal behavior, and the results are often mesmerizing. This made ants a perfect place to start.
 
-Currently, Simulant only simulates foraging behavior among ants, but is in process to eventually include a whole colony, both above and below ground. Several refactorings will likely be necessary to acheive this goal.
+Currently, Simul*ant* only simulates foraging behavior among ants, but is in process to eventually include a whole colony, both above and below ground. Several refactorings will likely be necessary to acheive this goal.
 
 ## Future Goals
 (as of July 2020)
