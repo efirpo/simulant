@@ -1,13 +1,14 @@
-__SIMULANT__
+__SIMUL*ANT*__
 initialized July 17th, 2020, by Ethan Alexander Firpo
 
 ## Description
 
-Simulant is the beginning of a project that will showcase many different simulations of animal behavior, natural phenomena, and other algorithmically interesting things to simulate. The goal of this project is to encourage interest in the sciences and programming through the showcasing of what is possible with just a little applied logic.
+Simul*ant* is the beginning of a project that will showcase many different simulations of animal behavior, natural phenomena, and other algorithmically interesting things to simulate. The goal of this project is to encourage interest in the sciences and programming through the showcasing of what is possible with just a little applied logic.
 
-Ants have been chosen as the first simulation to happen because ant behavior is famously an example of complexity arising based upon simple rules that each agent in a group follows, allowing an ant colony to exhibit far more complex and evolutionarily advantageous behavior than any individual ant could on its own, or even is aware of happening in their daily life. As such modeling this behavior is relatively simple, and the results are often mesmerizing. This made ants a perfect place to start.
+Ants have been chosen as the first simulation to happen because ant behavior is famously an example of emergent behavior -- complexity arising based upon simple rules that each agent in a group follows -- allowing an ant colony to exhibit far more complex and evolutionarily advantageous behavior than any individual ant does on its own, or even is aware of happening in their daily life. As such modeling this behavior is relatively simple, compared to other examples of animal behavior, and the results are often mesmerizing. This made ants a perfect place to start.
 
-Currently, Simulant only simulates foraging behavior among ants, but is in process to eventually include a whole colony, both above and below ground. Several refactorings will likely be necessary to acheive this goal.
+Currently, Simul*ant* only simulates foraging behavior among ants, but is in process to eventually include a whole colony, both above and below ground. Several re-factorings will likely be necessary to achieve this goal. At time being, dark-red dots represent food, black dots represents ants, and bright-red dots represent ants carrying food. 
+
 
 ## Future Goals
 (as of July 2020)
@@ -15,9 +16,10 @@ Currently, Simulant only simulates foraging behavior among ants, but is in proce
 - Simulate in-nest ant colony behavior.
 - Simulate further context for the ant colony's environment.
 - Allow users to store and revisit ant colonies.
+- Allow users to determine environmental and behavioral parameters (speed, strength of pheromones, amount of food available, etc)
 - Allow users to interact with ants (feeding, obstruction-removal, etc)
 
-### Other behavioral simulations planned:
+### Other simulations planned:
 - Simulate bee colony behavior.
 - Simulate orb-weaver spider web-building behavior.
 - Simulate galactic colonization on cosmological time-scales(an exploration of the Fermi Paradox)
@@ -25,7 +27,7 @@ Currently, Simulant only simulates foraging behavior among ants, but is in proce
 
 ## Technology
 
-This project is currently built in JavaScript, using React.js as a framework for the eventual web site where these simulations will be hosted.
+This project is currently built in JavaScript, using React.js as a framework for the eventual web site where these simulations will be hosted. CreateJs, specifically the EaselJs sub-library(https://www.createjs.com/easeljs), was used to draw the simulation.
 
 ## Known Bugs
 

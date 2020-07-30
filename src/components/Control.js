@@ -92,7 +92,7 @@ class Control extends React.Component {
           if (!grid.population[i].followingTrail) {
             grid.population[i].followingTrail = true
           }
-          if (grid.trails.length < 4) {
+          if (grid.trails.length < 9) {
             grid.trails[i] = (grid.population[i].trail)
           }
         }
