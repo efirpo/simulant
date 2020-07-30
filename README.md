@@ -3,51 +3,33 @@ initialized July 17th, 2020, by Ethan Alexander Firpo
 
 ## Description
 
-Simulant is an application that simulates ant behavior using JavaScript.
+Simulant is the beginning of a project that will showcase many different simulations of animal behavior, natural phenomena, and other algorithmically interesting things to simulate. The goal of this project is to encourage interest in the sciences and programming through the showcasing of what is possible with just a little applied logic.
 
-## Capstone Proposal
+Ants have been chosen as the first simulation to happen because ant behavior is famously an example of complexity arising based upon simple rules that each agent in a group follows, allowing an ant colony to exhibit far more complex and evolutionarily advantageous behavior than any individual ant could on its own, or even is aware of happening in their daily life. As such modeling this behavior is relatively simple, and the results are often mesmerizing. This made ants a perfect place to start.
 
-#### Name of Student:
+Currently, Simulant only simulates foraging behavior among ants, but is in process to eventually include a whole colony, both above and below ground. Several refactorings will likely be necessary to acheive this goal.
 
-Ethan Firpo
+## Future Goals
+(as of July 2020)
+### For Simulant:
+- Simulate in-nest ant colony behavior.
+- Simulate further context for the ant colony's environment.
+- Allow users to store and revisit ant colonies.
+- Allow users to interact with ants (feeding, obstruction-removal, etc)
 
-#### Name of Project:
+### Other behavioral simulations planned:
+- Simulate bee colony behavior.
+- Simulate orb-weaver spider web-building behavior.
+- Simulate galactic colonization on cosmological time-scales(an exploration of the Fermi Paradox)
+- Simulate orbital mechanics and the three-body problem.
 
-#### Simulant -- but ant is in italics like it's the internet in 2002.
+## Technology
 
-#### Project's Purpose or Goal: (What will it do for users?)
+This project is currently built in JavaScript, using React.js as a framework for the eventual web site where these simulations will be hosted.
 
-Provide education for a beginner/intermediate level science audience on ants through real-time and interactive simulation of ant colony behavior and data.
+## Known Bugs
 
-#### List the absolute minimum features the project requires to meet this purpose or goal:
-
-Provide basic factual information on simplest ant behavior(foraging).
-Provide static simulation of simplest ant behavior.
-Allow a user to start/stop the simulation.
-What tools, frameworks, libraries, APIs, modules and/or other resources (whatever is specific to your track, and your language) will you use to create this MVP? List them all here. Be specific.
-
-- React (likely React Native and/or ReactDND)
-- CreateJS/EaselJS
-- Redux
-- Node.js
-
-
-#### If you finish developing the minimum viable product (MVP) with time to spare, what will you work on next? Describe these features here: Be specific.
-
-- Simulate in-nest colony behavior, reproduction, life cycles, labor roles.
-- Allow users to place food, water, otherwise interact with the ants, control speed at which simulation runs.
-- Allow users to store their own "ant farms" and come back to their colony.
-- Allow users to track individual ants' life cycles and behaviors.
-- Simulate other arthropod/animal behaviors -- bees foraging/colony activity, spider-web construction, and fish-school behavior come to mind as things I would like to build some day.  
-- Maybe game-ify the whole thing and add point systems, predators, rival ant colonies, randomize start conditions and make it all dynamic with RNG.
-
-#### What additional tools, frameworks, libraries, APIs, or other resources will these additional features require?
-
-I'll need a database for user information, but unknown whether I'll be using Firestore, or MongoDB. I'll have to see as we begin using Firestore.
-
-#### Is there anything else you'd like your instructor to know?
-
-This has been edited since the original proposal to reflect choices of development tools. CreateJS/EaselJS has replaced the Unity Engine as my choice to render the simulation, notably.
+- As of July 30th, 2020, ants currently get stuck in trails. The solution is imminently doable, but a planned refactor of how pheremone-trails work will be necessary to implement in-nest behavior later, so the current version may never work perfectly.
 
 ## Setup
 
@@ -56,7 +38,7 @@ This has been edited since the original proposal to reflect choices of developme
 3. In your terminal, navigate to the root directory of the project and run `npm install`
 4. Run `npm start` once that completes.
 5. Navigate to `localhost:3000` in your web browser.
-6. Enjoy the simple animation.
+6. Enjoy the simulation.
 
 ## Legal
 
